@@ -1,10 +1,6 @@
 services:
   - type: web
     name: kairos-email-api
-    env: php
+    env: docker
     region: oregon
     plan: free
-    buildCommand: ""
-    startCommand: ""
-    autoDeploy: true
-    
