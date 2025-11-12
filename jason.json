@@ -1,0 +1,9 @@
+{
+  "from": "remitente@empresa.com",
+  "to": "destino@correo.com",
+  "password": "password",
+  "subject": "Prueba",
+  "body": "Hola mundo desde API",
+  "attachment_name": "factura.zip",
+  "attachment_b64": ""
+}
