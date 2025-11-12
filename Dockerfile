@@ -1,14 +1,20 @@
 # Imagen base con PHP + Apache
 FROM php:8.2-apache
 
-# Copia el código al contenedor
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y unzip git
+
+# Copiar archivos del proyecto
 COPY . /var/www/html/
 
-# Habilita las extensiones necesarias
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+# Instalar Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Permisos (opcional, depende del hosting)
+# Instalar PHPMailer
+WORKDIR /var/www/html
+RUN composer install --no-interaction --no-progress
+
+# Dar permisos
 RUN chown -R www-data:www-data /var/www/html
 
-# Puerto por defecto
 EXPOSE 80
