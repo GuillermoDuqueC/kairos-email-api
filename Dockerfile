@@ -1,19 +1,17 @@
-# Imagen base con PHP + Apache
+# Imagen base oficial con PHP y Apache
 FROM php:8.2-apache
 
-# Instalar dependencias necesarias
+# Instalar herramientas necesarias
 RUN apt-get update && apt-get install -y unzip git
 
-# Copiar el código fuente al contenedor
-COPY . /var/www/html/
-
-# Copiar Composer desde imagen oficial
+# Copiar Composer desde su imagen oficial
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Establecer el directorio de trabajo
-WORKDIR /var/www/html
+# Copiar los archivos del proyecto
+COPY . /var/www/html/
 
-# Instalar dependencias PHP (PHPMailer)
+# Instalar dependencias PHP (PHPMailer, etc)
+WORKDIR /var/www/html
 RUN composer install --no-interaction --no-progress --prefer-dist
 
 # Exponer el puerto 80
