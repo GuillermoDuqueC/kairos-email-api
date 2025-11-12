@@ -4,3 +4,15 @@ services:
     env: docker
     region: oregon
     plan: free
+    # Path to the Dockerfile used to build the service (relative to this file)
+    dockerfilePath: Dockerfile
+    # Number of instances to run (start small on free plan)
+    instances: 1
+    # Automatic deploys from the connected Git repo (enable/disable as needed)
+    autoDeploy: true
+    # Example environment variables - add the real secrets in Render dashboard
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
