@@ -29,11 +29,8 @@ RUN composer install --no-interaction --no-progress --prefer-dist --optimize-aut
 # Habilitar módulo de reescritura (por si usas rutas amigables)
 RUN a2enmod rewrite
 
-# 👉 Configurar Apache para usar el puerto dinámico que Railway asigna
-RUN sed -i "s/80/${PORT}/g" /etc/apache2/sites-available/000-default.conf
-
-# Exponer el puerto dinámico
-EXPOSE ${PORT}
+# Exponer el puerto 80 (Railway lo redirige automáticamente)
+EXPOSE 80
 
 # Comando por defecto para ejecutar Apache en primer plano
 CMD ["apache2-foreground"]
