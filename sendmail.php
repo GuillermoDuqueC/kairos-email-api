@@ -104,12 +104,20 @@
         // Inicializar PHPMailer
         $mail = new PHPMailer(true);
         $mail->isSMTP();
+        /*
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = $from;
         $mail->Password = $password;
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
+        */
+        $mail->Host = getenv('SMTP_HOST') ?: 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $from;
+        $mail->Password = $password;
+        $mail->SMTPSecure = getenv('SMTP_SECURE') ?: 'tls';
+        $mail->Port = getenv('SMTP_PORT') ?: 587;        
         $mail->CharSet = 'UTF-8';
 
         $mail->setFrom($from);
