@@ -1,5 +1,13 @@
 {
+  "name": "guillermo/kairos-email-api",
+  "description": "API para envío de correos con PHPMailer",
   "require": {
+    "php": ">=7.3",
     "phpmailer/phpmailer": "^6.9"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "chmod -R 755 /var/www/html"
+    ]
   }
 }
