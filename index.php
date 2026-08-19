@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
     // **CRÍTICO**: Headers CORS y permisivos ANTES de cualquier lógica
     header('Access-Control-Allow-Origin: *');
@@ -9,23 +9,6 @@
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-
-    // **NUEVO**: Logging para diagnóstico
-    $logFile = __DIR__ . '/api_requests.log';
-    
-   // **NUEVO**: Log completo para diagnóstico del cliente problemático
-    $logData = [
-        'timestamp' => date('Y-m-d H:i:s'),
-        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
-        'method' => $_SERVER['REQUEST_METHOD'] ?? 'unknown',
-        'content_type' => $_SERVER['CONTENT_TYPE'] ?? 'NOT SET',
-        'content_length' => $_SERVER['CONTENT_LENGTH'] ?? 0,
-        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown',
-        'x_forwarded_for' => $_SERVER['HTTP_X_FORWARDED_FOR'] ?? 'none',
-        'server_name' => $_SERVER['SERVER_NAME'] ?? 'unknown',
-        'https' => $_SERVER['HTTPS'] ?? 'off'
-    ];
-    file_put_contents(__DIR__ . '/access_log.txt', json_encode($logData, JSON_PRETTY_PRINT) . "\n---\n", FILE_APPEND);
 
     function sendJsonResponse($data, $statusCode = 200) {
         http_response_code($statusCode);
