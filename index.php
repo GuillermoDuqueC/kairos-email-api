@@ -65,8 +65,11 @@
 
         // Decodificar body Base64 y guardar HTML temporal
         $bodyHtml = !empty($data['body']) ? base64_decode($data['body']) : ($data['body'] ?? '');
-        $tempHtmlFile = sys_get_temp_dir() . "/correo_body_" . uniqid() . ".html";
-        file_put_contents($tempHtmlFile, $bodyHtml);
+
+        //  $tempHtmlFile = sys_get_temp_dir() . "/correo_body_" . uniqid() . ".html";
+        //  file_put_contents($tempHtmlFile, $bodyHtml);
+
+
 
         if (!filter_var($from, FILTER_VALIDATE_EMAIL)) {
             sendJsonResponse(['status' => 'ERROR', 'Description' => "Remitente inválido: $from"], 400);
@@ -90,7 +93,9 @@
         $mail->setFrom($from);
         $mail->addAddress($to);
         $mail->Subject = $subject;
-        $mail->MsgHTML(file_get_contents($tempHtmlFile));
+
+        //  $mail->MsgHTML(file_get_contents($tempHtmlFile));
+        $mail->MsgHTML($bodyHtml);
 
         // Adjuntos Base64
         if (!empty($data['attachment_b64'])) {
