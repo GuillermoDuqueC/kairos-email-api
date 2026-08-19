@@ -26,14 +26,6 @@
         exit;
     }
     
-        file_put_contents('debug_http.txt',
-        "TIME: " . date('Y-m-d H:i:s') . "\n" .
-        "CONTENT_TYPE: " . ($_SERVER['CONTENT_TYPE'] ?? 'N/A') . "\n" .
-        "RAW_BODY:\n" . file_get_contents("php://input") . "\n\n",
-        FILE_APPEND
-    );
-
-
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         sendJsonResponse(['status' => 'ERROR', 'Description' => 'Método HTTP no permitido'], 405);
     }
