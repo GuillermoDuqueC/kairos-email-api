@@ -100,9 +100,18 @@
         // Adjuntos Base64
         if (!empty($data['attachment_b64'])) {
             $attachmentName = !empty($data['attachment_name']) ? $data['attachment_name'] : 'archivo_adjunto';
-            $tmpPath = sys_get_temp_dir() . "/" . basename($attachmentName);
-            file_put_contents($tmpPath, base64_decode($data['attachment_b64']));
-            $mail->addAttachment($tmpPath, $attachmentName);
+
+            //  $tmpPath = sys_get_temp_dir() . "/" . basename($attachmentName);
+            //  file_put_contents($tmpPath, base64_decode($data['attachment_b64']));
+            //  $mail->addAttachment($tmpPath, $attachmentName);
+
+            $attachment = base64_decode($data['attachment_b64'], true);
+
+            $mail->addStringAttachment(
+                $attachment,
+                $attachmentName
+            );
+
         }
 
         // Enviar correo
