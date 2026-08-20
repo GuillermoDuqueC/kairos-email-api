@@ -118,7 +118,7 @@
         $mail->send();
 
         // Limpiar archivos temporales
-        if (file_exists($tempHtmlFile)) unlink($tempHtmlFile);
+        //  if (file_exists($tempHtmlFile)) unlink($tempHtmlFile);
         if (!empty($tmpPath) && file_exists($tmpPath)) unlink($tmpPath);
 
         sendJsonResponse([
